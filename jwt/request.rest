@@ -1,0 +1,11 @@
+GET http://localhost:3000/blurbs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTA2OTQxMjgsImV4cCI6MTYxMDY5NzcyOH0.PYIfqz9nLEvKyjV01Dsz1fZ0SayrOawx9Bf0E77OJfM
+
+###
+
+POST http://localhost:3000/login
+Content-Length: application/json
+
+{
+	"username": "tia"
+}
