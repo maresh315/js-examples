@@ -1,4 +1,6 @@
-require('dotenv').config()
+if(process.env.NODE_ENV !== 'production'){
+	require('dotenv').config()
+}
 
 const express = require('express');
 const jwt = require('jsonwebtoken')
@@ -8,6 +10,7 @@ const PORT = 3000;
 
 app.use(express.json())
 
+// temp
 const blurbs = [
 	{
 		username: 'mya',
@@ -15,40 +18,29 @@ const blurbs = [
 	},
 	{
 		username: 'tia',
-		blurb: "Dolphins should bbe man's best friend"
+		blurb: "Dolphins should may be man's best friend"
+	},
+	{
+		username: 'guess',
+		blurb: 'I am just a catch all'
 	}
 ];
 
 app.get('/blurbs', authenticateToken, (req, res) =>{
-	res.json(blurbs.filter(blurb => blurb.username === req.user.username));
-});
 
-app.post('/login', (req, res) =>{
-	// Authenticate User
-	// jwt implementation
-
-	const username = req.body.username
-	const user = { name: username }
-
-	const accessToken = jwt.sign(user,
-		process.env.ACCESS_TOKEN_SECRET,
-		{expiresIn: '1h'}
-	)
-
-	res.json({accessToken:accessToken})
+	res.json(blurbs.filter(blurb => blurb.username == req.user.username ));
 });
 
 function authenticateToken(req,res,next){
 	const authHeader = req.headers['authorization'];
+	// jwt -=> Bearer [TOKEN]
 	const token = authHeader && authHeader.split(' ')[1];
 	if (token == null) return res.sendStatus(401);
 
 	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) =>{
-		if(err) {
-			console.log(err)
-			return res.sendStatus(403)
-		};
+		if (err) return res.sendStatus(403)
 		
+		console.log(user)
 		req.user = user;
 		next();
 	})

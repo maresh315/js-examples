@@ -1,11 +1,32 @@
+### ENDPOINT TESTING
+
 GET http://localhost:3000/blurbs
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTA2OTQxMjgsImV4cCI6MTYxMDY5NzcyOH0.PYIfqz9nLEvKyjV01Dsz1fZ0SayrOawx9Bf0E77OJfM
+# HEADER
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiaWF0IjoxNjEwNzU2MDc3LCJleHAiOjE2MTA3NTYwOTJ9.St2SRUBIu-JLewlQa1NGfYiLYsZ4C3-fqKZQUtPYYmo
 
-###
+### GET ACCESS/REFRESH TOKEN
 
-POST http://localhost:3000/login
-Content-Length: application/json
+POST http://localhost:4000/login
+Content-Type: : application/json
+
+# { "username": "mya" }
+###{	"username": "tia" }
+
+
+### REFRESH TOKEN BELOW
+
+POST http://localhost:4000/refresh
+
+{ 
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiaWF0IjoxNjEwNzU2MDc3fQ._tNejwnw_cO7WYrvEhkvCkuSmn0RNI2vrxT6ltKRXOM"
+}
+
+
+### CONTROLLED DELETE OF PERMANENT REFRESH TOKEN BELOW
+
+DELETE http://localhost:4000/logout
+Content-Type: : application/json
 
 {
-	"username": "tia"
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVuZGVmaW5lZCIsImlhdCI6MTYxMDc0MzkxOX0.tEuwvFNwnAbvjfL962WmB-o6DyG57TZoUpa4hpdVTG8"
 }
